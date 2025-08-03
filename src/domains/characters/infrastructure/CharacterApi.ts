@@ -6,13 +6,19 @@ export interface CharacterApiResponse {
   gender: string
   species: string[]
   films: string[]
-  // otros campos omitidos
+  url: string
 }
 
 export const CharacterApi = {
   async getAll(): Promise<CharacterApiResponse[]> {
     const baseUrl = import.meta.env.VITE_API_BASE_URL
     const response = await axios.get<CharacterApiResponse[]>(`${baseUrl}/people`)
+    return response.data
+  },
+
+  async getById(id: string): Promise<CharacterApiResponse> {
+    const baseUrl = import.meta.env.VITE_API_BASE_URL
+    const response = await axios.get<CharacterApiResponse>(`${baseUrl}/people/${id}`)
     return response.data
   },
 }

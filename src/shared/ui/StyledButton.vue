@@ -5,8 +5,6 @@
 </template>
 
 <style lang="scss" scoped>
-@use '@/shared/styles/_variables.module.scss' as *;
-
 .styled-button {
   background-color: $primary-color;
   color: white;

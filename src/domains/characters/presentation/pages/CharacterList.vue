@@ -11,12 +11,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="character in characters" :key="character.name">
+        <tr v-for="character in characters" :key="character.id">
           <td>{{ character.name }}</td>
           <td>{{ character.birthYear }}</td>
           <td>{{ character.gender }}</td>
           <td>
-            <StyledButton>
+            <StyledButton @click="goToDetail(character)">
               View
             </StyledButton>
           </td>
@@ -27,16 +27,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { CharacterRepositoryHttp } from '../../adapters/CharacterRepositoryHttp';
-import { GetAllCharacters } from '../../application/GetAllCharacters';
-import type { Character } from '../../domain/Character';
 import StyledButton from '@/shared/ui/StyledButton.vue';
+import { useCharacterList } from '../../presentation/composables/useCharacterList';
 
-const characters = ref<Character[]>([]);
-const useCase = new GetAllCharacters(new CharacterRepositoryHttp());
+const { characters, goToDetail } = useCharacterList()
 
-onMounted(async () => {
-  characters.value = await useCase.execute();
-});
 </script>
