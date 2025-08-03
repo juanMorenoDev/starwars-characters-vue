@@ -7,12 +7,13 @@
       <p>{{ error }}</p>
     </div>
     <div v-else-if="character" class="container">
-      <h1 class="title">{{ character.name }}</h1>
+      <h1 class="title"> <button @click="goBack" class="back-button">←</button>
+        {{ character.name }}</h1>
 
       <div class="info-card">
         <p><strong>Birth Year:</strong> {{ character.birthYear }}</p>
         <p><strong>Gender:</strong> {{ character.gender }}</p>
-        
+
         <p><strong>Species:</strong></p>
         <ul>
           <li v-for="(specie, index) in character.species" :key="index">{{ specie }}</li>
@@ -31,9 +32,15 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
 import { useCharacterDetail } from '../composables/useCharacterDetails';
 
 const { character, isLoading, error } = useCharacterDetail();
+const router = useRouter();
+
+const goBack = () => {
+  router.back();
+};
 </script>
 
 <style lang="scss" scoped>
@@ -47,6 +54,23 @@ const { character, isLoading, error } = useCharacterDetail();
 
   &.error {
     color: #ef4444; // a red color for errors
+  }
+}
+
+.back-button {
+  background-color: transparent;
+  border: 1px solid $primary-color;
+  color: $primary-color;
+  padding: 0.5rem 1rem;
+  border-radius: $border-radius;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: $primary-color;
+    color: $white;
   }
 }
 
