@@ -6,7 +6,7 @@ export interface CharacterApiResponse {
   gender: string
   species: string[]
   films: string[]
-  // otros campos omitidos
+  url: string
 }
 
 export const CharacterApi = {
