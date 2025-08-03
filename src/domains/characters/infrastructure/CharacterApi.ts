@@ -15,4 +15,10 @@ export const CharacterApi = {
     const response = await axios.get<CharacterApiResponse[]>(`${baseUrl}/people`)
     return response.data
   },
+
+  async getById(id: string): Promise<CharacterApiResponse> {
+    const baseUrl = import.meta.env.VITE_API_BASE_URL
+    const response = await axios.get<CharacterApiResponse>(`${baseUrl}/people/${id}`)
+    return response.data
+  },
 }

@@ -1,30 +1,55 @@
 <template>
   <section class="character-detail">
-    <div class="container">
-      <h1 class="title">Character Detail</h1>
+    <div v-if="isLoading" class="centered-message">
+      <p>Loading character...</p>
+    </div>
+    <div v-else-if="error" class="centered-message error">
+      <p>{{ error }}</p>
+    </div>
+    <div v-else-if="character" class="container">
+      <h1 class="title">{{ character.name }}</h1>
 
       <div class="info-card">
-        <p><strong>Name:</strong> --</p>
-        <p><strong>Birth Year:</strong> --</p>
-        <p><strong>Gender:</strong> --</p>
+        <p><strong>Birth Year:</strong> {{ character.birthYear }}</p>
+        <p><strong>Gender:</strong> {{ character.gender }}</p>
+        
         <p><strong>Species:</strong></p>
         <ul>
-          <li v-for="(specie, index) in [1, 2]" :key="index">--</li>
+          <li v-for="(specie, index) in character.species" :key="index">{{ specie }}</li>
         </ul>
+
         <p><strong>Films:</strong></p>
         <ul>
-          <li v-for="(film, index) in [1, 2]" :key="index">--</li>
+          <li v-for="(film, index) in character.films" :key="index">{{ film }}</li>
         </ul>
       </div>
+    </div>
+    <div v-else class="centered-message">
+      <p>Character not found.</p>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-// No hay lógica aún
+import { useCharacterDetail } from '../composables/useCharacterDetails';
+
+const { character, isLoading, error } = useCharacterDetail();
 </script>
 
 <style lang="scss" scoped>
+.centered-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 1.2rem;
+  color: $text-color;
+
+  &.error {
+    color: #ef4444; // a red color for errors
+  }
+}
+
 .character-detail {
   padding: 2rem;
 
