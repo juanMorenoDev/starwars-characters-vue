@@ -30,8 +30,22 @@ describe('CharacterList.vue', () => {
 
   it('debería renderizar los datos de los personajes cuando se carguen', () => {
     charactersMock = [
-      { id: '1', name: 'Luke Skywalker', birthYear: '19BBY', gender: 'Male' },
-      { id: '2', name: 'Darth Vader', birthYear: '41BBY', gender: 'Male' },
+      {
+        id: '1',
+        name: 'Luke Skywalker',
+        birthYear: '19BBY',
+        gender: 'Male',
+        species: [],
+        films: [],
+      },
+      {
+        id: '2',
+        name: 'Darth Vader',
+        birthYear: '41BBY',
+        gender: 'Male',
+        species: [],
+        films: [],
+      },
     ]
     isLoadingMock = false
 
