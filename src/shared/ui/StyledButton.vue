@@ -1,20 +1,17 @@
 <template>
-  <button class="styled-button">
-    <slot />
-  </button>
+  <v-btn variant="elevated" color="primary" class="styled-button" icon>
+    <v-icon :icon="iconName" color="white" />
+  </v-btn>
 </template>
+
+<script setup lang="ts">
+defineProps<{
+  iconName: string
+}>()
+</script>
 
 <style lang="scss" scoped>
 .styled-button {
-  background-color: $primary-color;
-  color: white;
-  padding: $padding;
-  border: none;
-  border-radius: $border-radius;
-  font-size: $font-size;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-
   &:hover {
     background-color: $secondary-color;
   }

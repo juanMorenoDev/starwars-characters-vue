@@ -1,8 +1,7 @@
 <template>
-  <div class="app">
-    <h1>Hola Vue + Sass 👋</h1>
+  <v-app>
     <RouterView />
-  </div>
+  </v-app>
 </template>
 
 <script setup lang="ts">

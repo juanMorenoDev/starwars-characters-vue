@@ -16,9 +16,7 @@
           <td>{{ character.birthYear }}</td>
           <td>{{ character.gender }}</td>
           <td>
-            <StyledButton @click="goToDetail(character)">
-              View
-            </StyledButton>
+            <StyledButton @click="goToDetail(character)" iconName="mdi-information-outline" />
           </td>
         </tr>
       </tbody>
