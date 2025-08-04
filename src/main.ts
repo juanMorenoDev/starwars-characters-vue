@@ -13,6 +13,16 @@ import router from './router'
 const vuetify = createVuetify({
   components,
   directives,
+  theme: {
+    themes: {
+      light: {
+        colors: {
+          primary: '#FFE81F',
+          secondary: '#1e31b0',
+        },
+      },
+    },
+  },
 })
 
 const app = createApp(App)

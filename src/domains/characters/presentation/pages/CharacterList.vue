@@ -1,36 +1,45 @@
 <template>
-  <div class="character-list">
-    <h1>Characters</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Birth Year</th>
-          <th>Gender</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody v-if="!isLoading">
-        <tr v-for="character in characters" :key="character.id">
-          <td>{{ character.name }}</td>
-          <td>{{ character.birthYear }}</td>
-          <td>{{ character.gender }}</td>
-          <td>
-            <StyledButton @click="goToDetail(character)" iconName="mdi-information-outline" />
-          </td>
-        </tr>
-      </tbody>
-      <div v-else>
-        <p>Loading characters...</p>
-      </div>
-    </table>
-  </div>
+  <v-container>
+    <v-row class="mb-4" justify="space-between" align="center">
+      <v-col cols="12">
+        <h1 class="text-h4 font-weight-bold text-secondary">Star Wars Characters</h1>
+      </v-col>
+    </v-row>
+
+    <v-card>
+      <v-card-title>
+        <v-text-field variant="outlined" v-model="search" append-inner-icon="mdi-magnify" label="Search" single-line
+          hide-details clearable />
+      </v-card-title>
+
+      <v-data-table :headers="headers" :items="filteredCharacters" :loading="isLoading" :search="search"
+        :items-per-page="10" class="elevation-1" :header-props="{ style: 'font-weight: bold' }">
+        <template v-slot:loading>
+          <v-row justify="center" class="py-6">
+            <v-progress-circular indeterminate color="primary"></v-progress-circular>
+          </v-row>
+        </template>
+
+        <template v-slot:[`item.actions`]="{ item }">
+          <StyledButton @click="goToDetail(item)" iconName="mdi-information-outline" />
+        </template>
+
+        <template v-slot:no-data>
+          <v-alert type="info" class="ma-4">
+            No characters found
+          </v-alert>
+        </template>
+      </v-data-table>
+    </v-card>
+  </v-container>
 </template>
 
 <script setup lang="ts">
-import StyledButton from '@/shared/ui/StyledButton.vue';
 import { useCharacterList } from '../../presentation/composables/useCharacterList';
+import StyledButton from '@/shared/ui/StyledButton.vue';
 
-const { characters, goToDetail, isLoading } = useCharacterList()
+const { goToDetail, isLoading, headers, search, filteredCharacters } = useCharacterList();
+
+
 
 </script>

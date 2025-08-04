@@ -1,5 +1,5 @@
 <template>
-  <v-btn variant="elevated" color="primary" class="styled-button" icon>
+  <v-btn size="small" variant="elevated" color="primary" class="styled-button" icon>
     <v-icon :icon="iconName" color="white" />
   </v-btn>
 </template>

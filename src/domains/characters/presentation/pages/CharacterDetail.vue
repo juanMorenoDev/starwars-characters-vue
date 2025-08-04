@@ -50,7 +50,6 @@ const goBack = () => {
   align-items: center;
   height: 200px;
   font-size: 1.2rem;
-  color: $text-color;
 
   &.error {
     color: #ef4444; // a red color for errors
