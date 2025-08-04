@@ -10,7 +10,7 @@
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="!isLoading">
         <tr v-for="character in characters" :key="character.id">
           <td>{{ character.name }}</td>
           <td>{{ character.birthYear }}</td>
@@ -22,6 +22,9 @@
           </td>
         </tr>
       </tbody>
+      <div v-else>
+        <p>Loading characters...</p>
+      </div>
     </table>
   </div>
 </template>
@@ -30,6 +33,6 @@
 import StyledButton from '@/shared/ui/StyledButton.vue';
 import { useCharacterList } from '../../presentation/composables/useCharacterList';
 
-const { characters, goToDetail } = useCharacterList()
+const { characters, goToDetail, isLoading } = useCharacterList()
 
 </script>

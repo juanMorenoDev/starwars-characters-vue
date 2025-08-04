@@ -7,13 +7,16 @@ import { useSelectedCharacterStore } from '../stores/SelectedCharacter'
 
 export function useCharacterList() {
   const router = useRouter()
+  const isLoading = ref(false)
   const characters = ref<Character[]>([])
   const { setSelectedCharacter } = useSelectedCharacterStore()
 
   const useCase = new GetAllCharacters(new CharacterRepositoryHttp())
 
   const fetchCharacters = async () => {
+    isLoading.value = true
     characters.value = await useCase.execute()
+    isLoading.value = false
   }
 
   const goToDetail = (character: Character) => {
@@ -26,5 +29,6 @@ export function useCharacterList() {
   return {
     characters,
     goToDetail,
+    isLoading,
   }
 }
