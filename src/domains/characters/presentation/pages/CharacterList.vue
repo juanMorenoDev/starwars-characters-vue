@@ -1,15 +1,18 @@
 <template>
   <v-container>
-    <v-row class="mb-4" justify="space-between" align="center">
-      <v-col cols="12">
-        <h1 class="text-h4 font-weight-bold text-secondary star-wars-font">Star Wars Characters</h1>
-      </v-col>
-    </v-row>
-
     <v-card>
       <v-card-title>
-        <v-text-field variant="outlined" v-model="search" append-inner-icon="mdi-magnify" label="Search" single-line
-          hide-details clearable />
+        <v-container>
+          <v-row>
+            <v-col cols="12" md="8" sm="7">
+              <h1 class="text-h6 font-weight-bold text-md-h5 text-secondary star-wars-font">Star Wars Characters</h1>
+            </v-col>
+            <v-col cols="12" md="4" sm="5">
+              <v-text-field variant="outlined" v-model="search" append-inner-icon="mdi-magnify" label="Search"
+                single-line hide-details clearable density="compact" />
+            </v-col>
+          </v-row>
+        </v-container>
       </v-card-title>
 
       <v-data-table :headers="headers" :items="filteredCharacters" :loading="isLoading" :search="search"

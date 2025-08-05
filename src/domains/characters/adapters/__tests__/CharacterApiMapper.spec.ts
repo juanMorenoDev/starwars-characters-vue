@@ -8,10 +8,7 @@ describe('CharacterApiMapper', () => {
     birth_year: '19BBY',
     gender: 'male',
     species: ['https://swapi.dev/api/species/1/'],
-    films: [
-      'https://swapi.dev/api/films/1/',
-      'https://swapi.dev/api/films/2/',
-    ],
+    films: ['https://swapi.dev/api/films/1/', 'https://swapi.dev/api/films/2/'],
     url: 'https://swapi.dev/api/people/1/',
   }
 
@@ -23,11 +20,8 @@ describe('CharacterApiMapper', () => {
       name: 'Luke Skywalker',
       birthYear: '19BBY',
       gender: 'male',
-      species: ['https://swapi.dev/api/species/1/'],
-      films: [
-        'https://swapi.dev/api/films/1/',
-        'https://swapi.dev/api/films/2/',
-      ],
+      species: ['1'],
+      films: ['1', '2'],
     })
   })
 
