@@ -1,6 +1,19 @@
 @use './variables.module' as *;
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+// @import url('https://www.mysitename.co.uk/folder/folder/Starjedi.ttf');
+// @import url('https://fonts.cdnfonts.com/css/star-wars');
+@font-face {
+  font-family: 'Star Jedi Rounded';
+  src: url('https://db.onlinewebfonts.com/t/8167358cb5bf5473b1900b990d209455.eot');
+  src:
+    url('https://db.onlinewebfonts.com/t/8167358cb5bf5473b1900b990d209455.eot?#iefix')
+      format('embedded-opentype'),
+    url('https://db.onlinewebfonts.com/t/8167358cb5bf5473b1900b990d209455.woff') format('woff'),
+    url('https://db.onlinewebfonts.com/t/8167358cb5bf5473b1900b990d209455.ttf') format('truetype'),
+    url('https://db.onlinewebfonts.com/t/8167358cb5bf5473b1900b990d209455.svg#Star Jedi Rounded')
+      format('svg');
+}
 
 * {
   box-sizing: border-box;
@@ -13,9 +26,12 @@
     'Segoe UI',
     Roboto,
     sans-serif;
-  color: $text-color;
 }
 
 body {
   background-color: $background-color;
+}
+
+.star-wars-font {
+  font-family: 'Star Jedi Rounded';
 }

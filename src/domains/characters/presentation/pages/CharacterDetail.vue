@@ -1,113 +1,59 @@
 <template>
-  <section class="character-detail">
-    <div v-if="isLoading" class="centered-message">
-      <p>Loading character...</p>
-    </div>
-    <div v-else-if="error" class="centered-message error">
-      <p>{{ error }}</p>
-    </div>
-    <div v-else-if="character" class="container">
-      <h1 class="title"> <button @click="goBack" class="back-button">←</button>
-        {{ character.name }}</h1>
-
-      <div class="info-card">
-        <p><strong>Birth Year:</strong> {{ character.birthYear }}</p>
-        <p><strong>Gender:</strong> {{ character.gender }}</p>
-
-        <p><strong>Species:</strong></p>
-        <ul>
-          <li v-for="(specie, index) in character.species" :key="index">{{ specie }}</li>
-        </ul>
-
-        <p><strong>Films:</strong></p>
-        <ul>
-          <li v-for="(film, index) in character.films" :key="index">{{ film }}</li>
-        </ul>
-      </div>
-    </div>
-    <div v-else class="centered-message">
-      <p>Character not found.</p>
-    </div>
-  </section>
+  <v-main>
+    <v-container>
+      <v-row justify="center">
+        <v-col cols="12" md="8">
+          <v-card v-if="isLoading" class="text-center">
+            <v-card-text>
+              <v-progress-circular indeterminate color="primary" />
+              <p>Loading character...</p>
+            </v-card-text>
+          </v-card>
+          <v-card elevation="6" rounded="lg" v-else-if="character">
+            <v-card-text>
+              <v-row class="pa-5">
+                <v-col cols="4" sm="3" class="my-2">
+                  <v-row>
+                    <v-img :src="`/images/characters/${character.id}.jpg`" alt="Character" width="10rem"
+                      class="rounded-lg" />
+                  </v-row>
+                </v-col>
+                <v-col cols="8" sm="9">
+                  <v-row>
+                    <v-col cols="12">
+                      <h1 class="star-wars-font text-secondary">{{ character.name.toLowerCase() }}</h1>
+                      <p><strong>Birth Year:</strong> {{ character.birthYear }}</p>
+                      <p><strong>Gender:</strong> {{ character.gender }}</p>
+                    </v-col>
+                  </v-row>
+                  <ImageRow title="Films:" :images="character.films" baseUrl="/images/films" />
+                  <ImageRow title="Species:" :images="character.species" baseUrl="/images/species" />
+                </v-col>
+              </v-row>
+            </v-card-text>
+            <v-card-actions>
+              <v-container>
+                <v-row justify="center">
+                  <StyledIconButton @click="goBack" iconName="mdi-chevron-left" tooltip="Back" />
+                </v-row>
+              </v-container>
+            </v-card-actions>
+          </v-card>
+          <v-card v-else class="text-center">
+            <v-card-text>
+              <p>Character not found.</p>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-main>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import StyledIconButton from '../components/StyledIconButton.vue';
+import ImageRow from '../components/ImageRow.vue';
 import { useCharacterDetail } from '../composables/useCharacterDetails';
 
-const { character, isLoading, error } = useCharacterDetail();
-const router = useRouter();
-
-const goBack = () => {
-  router.back();
-};
+const { character, isLoading, goBack } = useCharacterDetail();
 </script>
-
-<style lang="scss" scoped>
-.centered-message {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-  font-size: 1.2rem;
-  color: $text-color;
-
-  &.error {
-    color: #ef4444; // a red color for errors
-  }
-}
-
-.back-button {
-  background-color: transparent;
-  border: 1px solid $primary-color;
-  color: $primary-color;
-  padding: 0.5rem 1rem;
-  border-radius: $border-radius;
-  cursor: pointer;
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
-  transition: background-color 0.2s, color 0.2s;
-
-  &:hover {
-    background-color: $primary-color;
-    color: $white;
-  }
-}
-
-.character-detail {
-  padding: 2rem;
-
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: $white;
-    border-radius: $border-radius;
-    box-shadow: $box-shadow;
-    padding: 2rem;
-  }
-
-  .title {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    color: $primary-color;
-  }
-
-  .info-card {
-    p {
-      margin: 0.5rem 0;
-      font-size: 1rem;
-    }
-
-    ul {
-      margin: 0.5rem 0 1rem;
-      padding-left: 1.25rem;
-      list-style-type: disc;
-
-      li {
-        margin: 0.25rem 0;
-      }
-    }
-  }
-}
-</style>

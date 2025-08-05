@@ -13,8 +13,8 @@ export const CharacterApiMapper = {
       name: apiCharacter.name,
       birthYear: apiCharacter.birth_year,
       gender: apiCharacter.gender,
-      species: apiCharacter.species,
-      films: apiCharacter.films,
+      species: apiCharacter.species.map(extractIdFromUrl),
+      films: apiCharacter.films.map(extractIdFromUrl),
     }
   },
 }
