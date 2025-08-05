@@ -26,8 +26,8 @@ export function useCharacterDetail() {
       error.value = null
       const useCase = new GetCharacterById(new CharacterRepositoryHttp())
       character.value = await useCase.execute(id)
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
+      console.error(e)
       error.value = 'An unexpected error occurred. Please try again later.'
     } finally {
       isLoading.value = false

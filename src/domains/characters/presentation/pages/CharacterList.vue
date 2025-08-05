@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="mb-4" justify="space-between" align="center">
       <v-col cols="12">
-        <h1 class="text-h4 font-weight-bold text-secondary">Star Wars Characters</h1>
+        <h1 class="text-h4 font-weight-bold text-secondary star-wars-font">Star Wars Characters</h1>
       </v-col>
     </v-row>
 
@@ -21,7 +21,7 @@
         </template>
 
         <template v-slot:[`item.actions`]="{ item }">
-          <StyledButton @click="goToDetail(item)" iconName="mdi-information-outline" />
+          <StyledIconButton @click="goToDetail(item)" iconName="mdi-information-outline" tooltip="Details" />
         </template>
 
         <template v-slot:no-data>
@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import { useCharacterList } from '../../presentation/composables/useCharacterList';
-import StyledButton from '@/shared/ui/StyledButton.vue';
+import StyledIconButton from '../../presentation/components/StyledIconButton.vue';
 
 const { goToDetail, isLoading, headers, search, filteredCharacters } = useCharacterList();
 
